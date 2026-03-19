@@ -24,3 +24,13 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* app/globals.css atau styles/glass.css */
+.glass-container {
+  background: rgba(255, 255, 255, 0.05); /* Putih transparan */
+  backdrop-filter: blur(10px); /* Efek Blur */
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Border tipis */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Shadow halus */
+}

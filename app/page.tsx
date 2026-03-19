@@ -1,5 +1,6 @@
 import NavBar from "./components/Navbar"
 import Credit from "./components/credit"
+import BarChart from "./components/chart"
 export default function Page(){
     return(
         <div className="flex flex-col relative">
