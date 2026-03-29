@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { act, useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
 // 1. Tipe Data
@@ -91,7 +91,7 @@ const ElegantPieChart = ({ pemasukkan, pengeluaran }: ElegantPieChartProps) => {
           .attr("d", arc);
         // Kembali ke tampilan default jika diinginkan, 
         // atau biarkan yang terakhir di-select (di sini saya hapus seleksi)
-        // setActiveData(null); 
+        setActiveData(null); 
       });
 
   }, [pemasukkan, pengeluaran]); // Re-render jika data berubah
@@ -100,7 +100,7 @@ const ElegantPieChart = ({ pemasukkan, pengeluaran }: ElegantPieChartProps) => {
   // Kita menumpuk Div di atas SVG dengan CSS absolute agar teks bisa di-style elegan
   return (
     <div style={{ position: 'relative', width: '300px', height: '300px' }}>
-      <svg ref={svgRef}></svg>
+      <svg className='' ref={svgRef}></svg>
       
       {/* Container Angka Tengah */}
       <div style={{
@@ -115,21 +115,20 @@ const ElegantPieChart = ({ pemasukkan, pengeluaran }: ElegantPieChartProps) => {
       }}>
         {activeData ? (
           <>
-            <div style={{ fontSize: '14px', opacity: 0.8, textTransform: 'uppercase' }}>
+            <div className='text-sm uppercase text-white font-bold' style={{ fontSize: '14px', textTransform: 'uppercase' }}>
               {activeData.name}
             </div>
-            <div style={{ 
+            <div className={` ${activeData.name === 'Pemasukkan' ? 'text-[#10B981] text-shadow-2xs text-shadow-[#2ff6b4]' : 'text-[#EF4444]'}`} style={{ 
               fontSize: '28px', 
-              fontWeight: 'bold', 
-              color: activeData.name === 'Pemasukkan' ? '#10B981' : '#EF4444' 
+              fontWeight: 'bold'
             }}>
               Rp {activeData.value.toLocaleString('id-ID')}
             </div>
           </>
         ) : (
           <>
-            <div style={{ fontSize: '14px', opacity: 0.8 }}>TOTAL SELISIH</div>
-            <div style={{ fontSize: '28px', fontWeight: 'bold' }}>
+            <div className='text-sm uppercase text-white font-bold'>Saldo</div>
+            <div className='text-blue-400 font-bold text-[28px] text-shadow-2xs text-shadow-blue-300'>
               Rp {(pemasukkan - pengeluaran).toLocaleString('id-ID')}
             </div>
           </>
