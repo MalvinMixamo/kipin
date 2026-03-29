@@ -1,11 +1,17 @@
-import { Category } from "@prisma/client"
-import { now } from "d3"
 import { NextResponse } from "next/server"
 import { useEffect, useState } from "react"
 
 interface modul{
     isActive: boolean,
-    onClose: void
+    onClose: () => void,
+    onRefresh: () => void
+}
+
+interface Category{
+    id: number,
+    name: string,
+    type: string
+
 }
 export default function AddModul({isActive, onClose, onRefresh}:modul){
     const [categories, setCategories] = useState<Category[]>([])
@@ -77,6 +83,7 @@ export default function AddModul({isActive, onClose, onRefresh}:modul){
             if(!res) alert('error')
             alert('data berhasil ditambahkan')
             onClose()
+            onRefresh()
         }catch(err){
             alert('error')
             return NextResponse.json(err, {status: 400})
