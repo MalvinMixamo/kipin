@@ -81,14 +81,14 @@ const ElegantPieChart = ({ pemasukkan, pengeluaran }: ElegantPieChartProps) => {
         d3.select(this)
           .transition()
           .duration(200)
-          .attr("d", arcHover);
+          .attr("d", arcHover as any);
         setActiveData(d.data); // Update angka tengah
       })
       .on("mouseout", function(event, d) {
         d3.select(this)
           .transition()
           .duration(200)
-          .attr("d", arc);
+          .attr("d", arc as any);
         // Kembali ke tampilan default jika diinginkan, 
         // atau biarkan yang terakhir di-select (di sini saya hapus seleksi)
         setActiveData(null); 
